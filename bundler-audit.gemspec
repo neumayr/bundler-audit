@@ -22,7 +22,8 @@ Gem::Specification.new do |gem|
 
   glob = lambda { |patterns| gem.files & Dir[*patterns] }
 
-  gem.files = `git ls-files`.split($/).reject { |f| f.start_with?('spec/') }
+  excluded = %w[spec/]
+  gem.files = `git ls-files`.split($/).reject { |f| excluded.any? { |path| f.start_with?(path) } }
   gem.files = glob[gemspec['files']] if gemspec['files']
 
   gem.executables = gemspec.fetch('executables') do
