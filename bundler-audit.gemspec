@@ -25,7 +25,6 @@ Gem::Specification.new do |gem|
   gem.files = `git ls-files -z`.split("\x0").reject do |f|
     f.match(%r{^(test|spec|\.github)/})
   end
-  gem.files = glob[gemspec['files']] if gemspec['files']
 
   gem.executables = gemspec.fetch('executables') do
     glob['bin/*'].map { |path| File.basename(path) }
